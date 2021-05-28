@@ -84,280 +84,334 @@ export default new Router({
    * 通过设置 meta: { keepAlive: true },来定义一个页面是否需要做缓存
    *
    **************************************************/
-  linkActiveClass: 'ac',
-  routes: [{
-    /**
+  linkActiveClass: "ac",
+  routes: [
+    {
+      /**
        * 设置页面初次加载后默认显示 find 页面
        */
-    path: '/',
-    name: 'main',
-    component: navIndex,
-    redirect: '/find',
-    children: [{
-      path: '/find',
-      component: findIndex
-    }, {
-      path: '/home',
-      name: 'home',
-      component: homeIndex
-    }, {
-      path: '/friend',
-      component: friend
-    }, {
-      path: '/videoPage',
-      name: 'videoPage',
-      component: videoIndex,
-      redirect: '/videoPage/musicFestival',
-      children: [{
-        path: '/videoPage/musicFestival',
-        component: musicFestival
-      }, {
-        path: '/videoPage/scene/:id',
-        component: scene
-      }, {
-        path: '/videoPage/listenBGM/:id',
-        component: listenBGM
-      }, {
-        path: '/videoPage/singing/:id',
-        component: singing
-      }, {
-        path: '/videoPage/dance/:id',
-        component: dance
-      }, {
-        path: '/videoPage/ACG/:id',
-        component: acg
-      }, {
-        path: '/videoPage/rock/:id',
-        component: rock
-      }, {
-        path: '/videoPage/game/:id',
-        component: game
-      }, {
-        path: '/videoPage/animation/:id',
-        component: animation
-      }]
-    }]
-  }, {
-    // 视频评论页面
-    // 使用  this.$router.push({ name: 'videoComments', params: { id } })
-    // 可以使得地址栏不显示 id 信息，并且可以通过 this.$route.params 获取到值
-    // 要注意这时候在path中不能再写 /:id
-    path: '/videoComments',
-    name: 'videoComments',
-    component: videoComments
-  }, {
-    // 更多新碟
-    path: '/moreNewDish',
-    component: moreNewDish
-  }, {
-    // 新歌推荐
-    path: '/moreNewSongs',
-    component: moreNewSongs,
-    redirect: '/chinese',
-    children: [{
-      path: '/chinese',
-      component: chinese
-    }, {
-      path: '/europe',
-      component: europe
-    }, {
-      path: '/korea',
-      component: korea
-    }, {
-      path: '/japan',
-      component: japan
-    }]
-  }, {
-    // 最近播放
-    path: '/recently',
-    component: recentlyPlayed
-  }, {
-    path: '/dj_sublist',
-    component: djSublist
-  }, {
-    path: '/favorite',
-    component: myFavorite,
-    redirect: '/albums',
-    children: [{
-      path: '/albums',
-      component: albums
-    }, {
-      path: '/artists',
-      component: artists
-    }, {
-      path: '/videos',
-      component: videos
-    }, {
-      path: '/column',
-      component: column
-    }, {
-      path: '/mlog',
-      component: mlog
-    }]
-  }, {
-    path: '/login',
-    name: 'login',
-    component: loginIndex
-  }, {
-    // 登录的一系列路由
-    path: '/phone',
-    component: phoneAccount
-  }, {
-    path: '/pwd',
-    name: 'phonePwd',
-    component: phonePwd
-  }, {
-    path: '/verify',
-    name: 'phoneVerify',
-    component: phoneVerify
-  },
-  {
-    // 搜索页
-    path: '/search',
-    component: search
-  },
-  {
-    // 搜索展示页面
-    path: '/searchResults/:id',
-    component: searchResults,
-    redirect: '/composite/:id',
-    children: [{
-      // 综合页面
-      path: '/composite/:id',
-      component: composite
-    }, {
-      // 单曲页面
-      path: '/song/:id',
-      component: song
-    }, {
-      // 视频页面
-      path: '/video/:id',
-      component: video
-    }, {
-      // 歌手页面
-      path: '/artist/:id',
-      component: artist
-    }, {
-      // 专辑页面
-      path: '/album/:id',
-      component: album
-    }, {
-      // 歌单页面
-      path: '/playList/:id',
-      component: playList
-    }, {
-      // 主播电台页面
-      path: '/djRadio/:id',
-      component: djRadio
-    }, {
-      // 用户页面
-      path: '/user/:id',
-      component: user
-    }]
-  },
-  {
-    // 歌手分类页面
-    path: '/singer',
-    component: singer
-  },
-  {
-    // 用户信息展示页面
-    path: '/user_info',
-    name: 'user_info',
-    component: userInfoIndex
-  },
-  {
-    // 每日推荐页面
-    path: '/dateRecommend',
-    component: dateRecommend
-  },
-  {
-    // 歌单广场页面
-    path: '/recommend',
-    component: recommend,
-    redirect: '/recommended',
-    children: [{
-      // 推荐歌单
-      path: '/recommended',
-      component: recommended
-    }, {
-      // 精品歌单
-      path: '/fine',
-      component: fine
-    }, {
-      // 通用歌单
-      path: '/general/:id',
-      component: general
-    }]
-  },
-  {
-    // 排行榜页面
-    path: '/idx',
-    component: idx
-  },
-  {
-    // 电台页面
-    path: '/dj',
-    component: dj
-  },
-  {
-    path: '/conDetail',
-    name: 'conDetail',
-    component: djTopConDetailPage
-  },
-  {
-    // 电台分类
-    path: '/classification',
-    component: classification
-  },
-  {
-    // 电台分类详情
-    path: '/classDetail',
-    name: 'classDetail',
-    component: djClassRecommendDetailPage
-  },
-  {
-    path: '/pay_fine',
-    component: djPayGift
-  },
-  {
-    path: '/ranking',
-    component: djRanking,
-    redirect: '/program',
-    children: [{
-      path: '/anchor',
-      component: djRankingAnchor
-    }, {
-      path: '/program',
-      component: djRankingProgram
-    }, {
-      path: '/radio',
-      component: djRankingRadio
-    }]
-  },
-  {
-    // 通用专辑展示页面
-    path: '/albumPage',
-    name: 'albumPage',
-    component: albumPage
-  },
-  {
-    // 通用电台详情展示页面
-    path: '/djDetailPage',
-    name: 'djDetailPage',
-    component: djDetailPage
-  },
-  {
-    // 通用歌手展示页面
-    path: '/artistDetailPage',
-    name: 'artistDetailPage',
-    component: artistDetailPage
-  },
-  {
-    // 通用评论展示页面
-    path: '/comments',
-    name: 'comments',
-    component: comments
-  }
+      path: "/",
+      name: "main",
+      component: navIndex,
+      redirect: "/find",
+      children: [
+        {
+          path: "/find",
+          component: findIndex
+        },
+        {
+          path: "/home",
+          name: "home",
+          component: homeIndex
+        },
+        {
+          path: "/friend",
+          component: friend
+        },
+        {
+          path: "/videoPage",
+          name: "videoPage",
+          component: videoIndex,
+          redirect: "/videoPage/musicFestival",
+          children: [
+            {
+              path: "/videoPage/musicFestival",
+              component: musicFestival
+            },
+            {
+              path: "/videoPage/scene/:id",
+              component: scene
+            },
+            {
+              path: "/videoPage/listenBGM/:id",
+              component: listenBGM
+            },
+            {
+              path: "/videoPage/singing/:id",
+              component: singing
+            },
+            {
+              path: "/videoPage/dance/:id",
+              component: dance
+            },
+            {
+              path: "/videoPage/ACG/:id",
+              component: acg
+            },
+            {
+              path: "/videoPage/rock/:id",
+              component: rock
+            },
+            {
+              path: "/videoPage/game/:id",
+              component: game
+            },
+            {
+              path: "/videoPage/animation/:id",
+              component: animation
+            }
+          ]
+        }
+      ]
+    },
+    {
+      // 视频评论页面
+      // 使用  this.$router.push({ name: 'videoComments', params: { id } })
+      // 可以使得地址栏不显示 id 信息，并且可以通过 this.$route.params 获取到值
+      // 要注意这时候在path中不能再写 /:id
+      path: "/videoComments",
+      name: "videoComments",
+      component: videoComments
+    },
+    {
+      // 更多新碟
+      path: "/moreNewDish",
+      component: moreNewDish
+    },
+    {
+      // 新歌推荐
+      path: "/moreNewSongs",
+      component: moreNewSongs,
+      redirect: "/chinese",
+      children: [
+        {
+          path: "/chinese",
+          component: chinese
+        },
+        {
+          path: "/europe",
+          component: europe
+        },
+        {
+          path: "/korea",
+          component: korea
+        },
+        {
+          path: "/japan",
+          component: japan
+        }
+      ]
+    },
+    {
+      // 最近播放
+      path: "/recently",
+      component: recentlyPlayed
+    },
+    {
+      path: "/dj_sublist",
+      component: djSublist
+    },
+    {
+      path: "/favorite",
+      component: myFavorite,
+      redirect: "/albums",
+      children: [
+        {
+          path: "/albums",
+          component: albums
+        },
+        {
+          path: "/artists",
+          component: artists
+        },
+        {
+          path: "/videos",
+          component: videos
+        },
+        {
+          path: "/column",
+          component: column
+        },
+        {
+          path: "/mlog",
+          component: mlog
+        }
+      ]
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: loginIndex
+    },
+    {
+      // 登录的一系列路由
+      path: "/phone",
+      component: phoneAccount
+    },
+    {
+      path: "/pwd",
+      name: "phonePwd",
+      component: phonePwd
+    },
+    {
+      path: "/verify",
+      name: "phoneVerify",
+      component: phoneVerify
+    },
+    {
+      // 搜索页
+      path: "/search",
+      component: search
+    },
+    {
+      // 搜索展示页面
+      path: "/searchResults/:id",
+      component: searchResults,
+      redirect: "/composite/:id",
+      children: [
+        {
+          // 综合页面
+          path: "/composite/:id",
+          component: composite
+        },
+        {
+          // 单曲页面
+          path: "/song/:id",
+          component: song
+        },
+        {
+          // 视频页面
+          path: "/video/:id",
+          component: video
+        },
+        {
+          // 歌手页面
+          path: "/artist/:id",
+          component: artist
+        },
+        {
+          // 专辑页面
+          path: "/album/:id",
+          component: album
+        },
+        {
+          // 歌单页面
+          path: "/playList/:id",
+          component: playList
+        },
+        {
+          // 主播电台页面
+          path: "/djRadio/:id",
+          component: djRadio
+        },
+        {
+          // 用户页面
+          path: "/user/:id",
+          component: user
+        }
+      ]
+    },
+    {
+      // 歌手分类页面
+      path: "/singer",
+      component: singer
+    },
+    {
+      // 用户信息展示页面
+      path: "/user_info",
+      name: "user_info",
+      component: userInfoIndex
+    },
+    {
+      // 每日推荐页面
+      path: "/dateRecommend",
+      component: dateRecommend
+    },
+    {
+      // 歌单广场页面
+      path: "/recommend",
+      component: recommend,
+      redirect: "/recommended",
+      children: [
+        {
+          // 推荐歌单
+          path: "/recommended",
+          component: recommended
+        },
+        {
+          // 精品歌单
+          path: "/fine",
+          component: fine
+        },
+        {
+          // 通用歌单
+          path: "/general/:id",
+          component: general
+        }
+      ]
+    },
+    {
+      // 排行榜页面
+      path: "/idx",
+      component: idx
+    },
+    {
+      // 电台页面
+      path: "/dj",
+      component: dj
+    },
+    {
+      path: "/conDetail",
+      name: "conDetail",
+      component: djTopConDetailPage
+    },
+    {
+      // 电台分类
+      path: "/classification",
+      component: classification
+    },
+    {
+      // 电台分类详情
+      path: "/classDetail",
+      name: "classDetail",
+      component: djClassRecommendDetailPage
+    },
+    {
+      path: "/pay_fine",
+      component: djPayGift
+    },
+    {
+      path: "/ranking",
+      component: djRanking,
+      redirect: "/program",
+      children: [
+        {
+          path: "/anchor",
+          component: djRankingAnchor
+        },
+        {
+          path: "/program",
+          component: djRankingProgram
+        },
+        {
+          path: "/radio",
+          component: djRankingRadio
+        }
+      ]
+    },
+    {
+      // 通用专辑展示页面
+      path: "/albumPage",
+      name: "albumPage",
+      component: albumPage
+    },
+    {
+      // 通用电台详情展示页面
+      path: "/djDetailPage",
+      name: "djDetailPage",
+      component: djDetailPage
+    },
+    {
+      // 通用歌手展示页面
+      path: "/artistDetailPage",
+      name: "artistDetailPage",
+      component: artistDetailPage
+    },
+    {
+      // 通用评论展示页面
+      path: "/comments",
+      name: "comments",
+      component: comments
+    }
   ]
-})
+});

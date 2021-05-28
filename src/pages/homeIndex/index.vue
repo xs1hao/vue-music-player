@@ -138,6 +138,7 @@ export default {
     ...mapActions(['startPlayAll'])
   },
   computed: {
+    // mapGetters vuex 的东西
     ...mapGetters({
       loginState: 'LOGIN_STATE',
       isMiniAudio: 'FULL_SCREEN',
